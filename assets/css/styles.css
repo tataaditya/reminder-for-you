@@ -637,6 +637,7 @@ body {
     height: 50vmin;
     border-top-left-radius: 100%;
     border-left: 2vmin solid #079097;
+    mask-image: linear-gradient(to top, transparent 25%, #079097 50%);
     -webkit-mask-image: linear-gradient(to top, transparent 25%, #079097 50%);
     position: relative;
     z-index: 1;
@@ -651,6 +652,7 @@ body {
     border-radius: 100% 0% 0% 100% / 100% 100% 0% 0%;
     box-shadow: inset 0 2px 1vmin hsla(184, 97%, 58%, 0.2);
     background-image: linear-gradient(to bottom left, transparent, var(--dark-color) 98%), linear-gradient(to bottom right, #23f0ff 45%, transparent 50%, transparent);
+    mask-image: linear-gradient(135deg, #159faa 40%, transparent 50%, transparent);
     -webkit-mask-image: linear-gradient(135deg, #159faa 40%, transparent 50%, transparent);
 }
 
@@ -722,6 +724,7 @@ body {
 }
 
 .long-g--1 .leaf {
+    mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
     -webkit-mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
 }
 
@@ -742,6 +745,7 @@ body {
 
 .long-g--2 .leaf,
 .long-g--3 .leaf {
+    mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
     -webkit-mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
 }
 
@@ -757,6 +761,7 @@ body {
 }
 
 .long-g--3 .leaf {
+    mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
     -webkit-mask-image: linear-gradient(to top, transparent 40%, #079097 80%) !important;
 }
 
@@ -768,6 +773,7 @@ body {
 }
 
 .long-g--4 .leaf {
+    mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
     -webkit-mask-image: linear-gradient(to top, transparent 50%, #079097 80%) !important;
 }
 
@@ -804,6 +810,7 @@ body {
     height: var(--h);
     border-top-left-radius: 100%;
     border-left: 2vmin solid var(--c);
+    mask-image: linear-gradient(to top, transparent 20%, var(--dark-color));
     -webkit-mask-image: linear-gradient(to top, transparent 20%, var(--dark-color));
     transform-origin: bottom center;
 }
@@ -1186,7 +1193,12 @@ body {
    =========================== */
 
 /* Wrapper for UI to sit above animation (except click-through parts) */
-#ui-layer {
+/* Wrapper for UI to sit above animation (except click-through parts) */
+.ui-layer {
+    display: none;
+    /* Controlled by JS fadeIn */
+    opacity: 0;
+    transition: opacity 1s ease-in;
     position: fixed;
     top: 0;
     left: 0;
@@ -1194,11 +1206,44 @@ body {
     height: 100%;
     z-index: 1000;
     pointer-events: none;
-    /* Let clicks pass through to background/flowers if needed */
+}
+
+.ui-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.ui-message {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.ui-buttons {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* Force side-by-side */
+}
+
+/* Tombol Khusus "Lihat Pesan" */
+.view-msg-btn {
+    background: linear-gradient(45deg, #ff4757, #ff6b81) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+.view-msg-btn:hover {
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
 }
 
 .header {
@@ -1829,8 +1874,24 @@ body {
     }
 
     .capture-btn {
-        font-size: 0.8em !important;
-        padding: 8px 16px !important;
+        font-size: 0.75em !important;
+        /* Perkecil font agar muat */
+        padding: 8px 12px !important;
+        /* Kurangi padding */
+        white-space: nowrap;
+        /* Jangan wrap text tombol */
+        min-width: unset;
+        /* Pastikan tidak ada min-width yang memaksa lebar */
+    }
+
+    .ui-container {
+        bottom: 20px;
+        /* Sedikit lebih bawah di HP */
+    }
+
+    .ui-buttons {
+        gap: 8px;
+        /* Rapatkan sedikit */
     }
 }
 
@@ -1939,29 +2000,58 @@ body {
 /* Mobile phones (max 480px) */
 @media (max-width: 480px) {
     .flowers {
-        /* Ubah scale(1.1) menjadi scale(0.6) atau 0.7 */
-        /* Sesuaikan angkanya sampai pas di layar HP kamu */
-        transform: translateX(-50%) scale(0.6); 
+        /* Scale up significantly */
+        transform: translateX(-50%) scale(1.3);
         transform-origin: bottom center;
-        bottom: 5vmin; /* Sedikit naikkan posisi bottom agar tidak terlalu tenggelam */
+        bottom: 5vh;
+        /* Sedikit naik dari paling bawah, tapi tidak melayang jauh */
     }
 
     .flower {
-        bottom: 15vmin; /* Atur ulang posisi batang bunga */
+        /* Naikkan posisi bunga relatif terhadap container agar batang terlihat panjang */
+        bottom: 25vmin;
     }
 
-    /* Mengurangi tinggi batang bunga agar tidak menabrak bagian atas layar */
-    .flower--1 .flower__line { height: 45vmin; }
-    .flower--2 .flower__line { height: 40vmin; }
-    .flower--3 .flower__line { height: 35vmin; }
+    .flower--1 .flower__line {
+        height: 55vmin;
+    }
+
+    .flower--2 .flower__line {
+        height: 50vmin;
+    }
+
+    .flower--3 .flower__line {
+        height: 45vmin;
+    }
 
     .night {
         filter: blur(0.05vmin);
     }
-    
-    /* Menyesuaikan elemen dekorasi lainnya agar proporsional */
+
+    /* Adjust decorative elements for mobile */
     .long-g {
-        transform: scale(0.5);
+        transform: scale(0.6);
+        bottom: 0;
+        /* Grounded */
+    }
+
+    .flower__g-right .leaf {
+        width: 18vmin;
+        height: 32vmin;
+    }
+
+    .flower__g-right--2 .leaf {
+        height: 45vmin;
+    }
+
+    .flower__grass {
+        transform: scale(0.7) rotate(-48deg) rotateY(40deg);
+        bottom: 12vmin;
+        /* Sedikit adjustments agar sesuai dengan bunga yang naik */
+    }
+
+    .flower__g-long {
+        transform: scale(0.8) rotate(-30deg) rotateY(-20deg);
         bottom: 10vmin;
     }
 }
@@ -1969,28 +2059,29 @@ body {
 /* Small phones (max 360px) */
 @media (max-width: 360px) {
     .flowers {
-        transform: translateX(-50%) scale(1.0);
+        transform: translateX(-50%) scale(1.1);
+        bottom: 5vh;
     }
 
     .flower {
-        bottom: 2vmin;
+        bottom: 22vmin;
     }
 
     .flower--1 .flower__line {
-        height: 45vmin;
+        height: 50vmin;
     }
 
     .flower--2 .flower__line {
-        height: 40vmin;
+        height: 45vmin;
     }
 
     .flower--3 .flower__line {
-        height: 35vmin;
+        height: 40vmin;
     }
 
     .long-g {
         transform: scale(0.5);
-        bottom: 12vmin;
+        bottom: 0;
     }
 }
 
@@ -2061,5 +2152,4 @@ body {
     .flower__grass {
         transform: scale(0.5) rotate(-48deg) rotateY(40deg);
     }
-
 }
