@@ -1,0 +1,12 @@
+{
+  "name": "surat-bunga",
+  "version": "1.0.0",
+  "description": "Virtual garden and guestbook",
+  "scripts": {
+    "start": "npx serve .",
+    "deploy": "firebase deploy"
+  },
+  "keywords": ["animation", "flower", "firebase"],
+  "author": "",
+  "license": "ISC"
+}
