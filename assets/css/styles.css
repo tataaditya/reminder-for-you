@@ -1939,51 +1939,30 @@ body {
 /* Mobile phones (max 480px) */
 @media (max-width: 480px) {
     .flowers {
-        transform: translateX(-50%) scale(1.1);
+        /* Ubah scale(1.1) menjadi scale(0.6) atau 0.7 */
+        /* Sesuaikan angkanya sampai pas di layar HP kamu */
+        transform: translateX(-50%) scale(0.6); 
         transform-origin: bottom center;
+        bottom: 5vmin; /* Sedikit naikkan posisi bottom agar tidak terlalu tenggelam */
     }
 
     .flower {
-        bottom: 3vmin;
+        bottom: 15vmin; /* Atur ulang posisi batang bunga */
     }
 
-    .flower--1 .flower__line {
-        height: 50vmin;
-    }
-
-    .flower--2 .flower__line {
-        height: 45vmin;
-    }
-
-    .flower--3 .flower__line {
-        height: 40vmin;
-    }
+    /* Mengurangi tinggi batang bunga agar tidak menabrak bagian atas layar */
+    .flower--1 .flower__line { height: 45vmin; }
+    .flower--2 .flower__line { height: 40vmin; }
+    .flower--3 .flower__line { height: 35vmin; }
 
     .night {
         filter: blur(0.05vmin);
     }
-
-    /* Adjust decorative elements for mobile */
+    
+    /* Menyesuaikan elemen dekorasi lainnya agar proporsional */
     .long-g {
-        transform: scale(0.6);
-        bottom: 15vmin;
-    }
-
-    .flower__g-right .leaf {
-        width: 18vmin;
-        height: 32vmin;
-    }
-
-    .flower__g-right--2 .leaf {
-        height: 45vmin;
-    }
-
-    .flower__grass {
-        transform: scale(0.7) rotate(-48deg) rotateY(40deg);
-    }
-
-    .flower__g-long {
-        transform: scale(0.8) rotate(-30deg) rotateY(-20deg);
+        transform: scale(0.5);
+        bottom: 10vmin;
     }
 }
 
@@ -2082,4 +2061,5 @@ body {
     .flower__grass {
         transform: scale(0.5) rotate(-48deg) rotateY(40deg);
     }
+
 }
