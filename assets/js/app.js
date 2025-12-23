@@ -186,7 +186,7 @@ async function showGuestbook() {
     let messagesHtml = await loadGuestbookMessages();
 
     const result = await Swal.fire({
-        title: '💌 tulis apapun',
+        title: '💌 Buku Tamu',
         html: `
             <div style="max-height: 200px; overflow-y: auto; margin-bottom: 15px; text-align: left; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 10px;">
                 <p style="font-size: 0.8em; color: #aaa; margin-bottom: 10px;">Pesan dari teman-teman:</p>
@@ -369,4 +369,3 @@ document.getElementById('view-messages-btn').addEventListener('click', async () 
         }
     });
 });
-
