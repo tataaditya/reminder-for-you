@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surat Bunga - Pesan Untukmu</title>
-    <link rel="stylesheet" href="assets/css/styles.css?v=3">
+    <link rel="stylesheet" href="assets/css/styles.css?v=6">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@
                 style="max-width: 180px; max-height: 220px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.6));">
 
             <h2 id="hai">Haii Semuanya, disini lumi si cinnamoroll !!</h2>
-            <h3 id="hi">Scrool kesamping ya !! ➡️</h3>
+            <h3 id="hi">Scroll kesamping ya !! ➡️</h3>
 
             <div id="slider">
                 <p>Lumi suka deh lagu ini.. lagunya tentang kehidupan dewasa...</p>
@@ -373,13 +373,13 @@
     </audio>
 
     <!-- UI Layer: Save and View Messages buttons -->
-    <div id="ui-layer" style="display: none; opacity: 0; transition: opacity 1s ease-in;">
-        <div style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); text-align: center;">
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px; font-size: 0.9em;">Semangat yah !! 🌸</p>
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+    <div id="ui-layer" class="ui-layer">
+        <div class="ui-container">
+            <p class="ui-message">Semangat yah !! 🌸</p>
+            <div class="ui-buttons">
                 <button id="capture-btn" class="capture-btn" title="Simpan sebagai gambar">📸 Mode Screenshot</button>
-                <button id="view-messages-btn" class="capture-btn" title="Lihat semua pesan"
-                    style="background: linear-gradient(45deg, #ff4757, #ff6b81);">💌 Lihat Pesan</button>
+                <button id="view-messages-btn" class="capture-btn view-msg-btn" title="Lihat semua pesan">💌 Lihat
+                    Pesan</button>
             </div>
         </div>
     </div>
@@ -387,6 +387,5 @@
     <!-- App Logic -->
     <script src="assets/js/app.js"></script>
 </body>
-
 
 </html>
